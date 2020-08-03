@@ -12,16 +12,6 @@ const {
   filterGraphQLMessages,
 } = require('./listenToGraphQLMessages');
 
-function getDefaultMeteorConnection() {
-  try {
-    // eslint-disable-next-line global-require
-    const { Meteor } = require('meteor/meteor');
-    return Meteor.connection;
-  } catch (err) {
-    throw new Error('ddp-apollo: missing connection param');
-  }
-}
-
 function getClientContext(operation, key = DEFAULT_CLIENT_CONTEXT_KEY) {
   return operation.getContext && operation.getContext()[key];
 }
@@ -37,7 +27,7 @@ function callPromise(connection, name, args, options) {
 
 class DDPMethodLink extends ApolloLink {
   constructor({
-    connection = getDefaultMeteorConnection(),
+    connection,
     method = DEFAULT_METHOD,
     ddpRetry = true,
     clientContextKey,
@@ -67,7 +57,7 @@ class DDPMethodLink extends ApolloLink {
 
 class DDPSubscriptionLink extends ApolloLink {
   constructor({
-    connection = getDefaultMeteorConnection(),
+    connection,
     publication = DEFAULT_PUBLICATION,
     subscriptionIdKey = DEFAULT_SUBSCRIPTION_ID_KEY,
     clientContextKey,
