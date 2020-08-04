@@ -3,7 +3,7 @@
   "version": "3.0.0",
   "description": "Apollo Link using DDP",
   "main": "src/index.js",
-  "browser": "dist/index.js",
+  "browser": "src/index.js",
   "devDependencies": {
     "babel-cli": "6.26.0",
     "babel-plugin-transform-object-rest-spread": "6.26.0",
