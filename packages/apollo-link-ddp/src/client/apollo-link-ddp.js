@@ -100,6 +100,7 @@ class DDPSubscriptionLink extends ApolloLink {
       return () => {
         if (subHandler.stop) {
           subHandler.stop();
+          subHandler.remove();
         } else if (this.connection.unsubscribe) {
           this.connection.unsubscribe(subId);
         } else {
